@@ -16,3 +16,6 @@ def home(request):
 
 def user_dashboard(request):
     return render(request,'user/user_dashboard.html')
+
+def home_admin(request):
+    return render(request, 'user/index.html')
