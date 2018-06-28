@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="x_content">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Bil</th>
+                <th>Nama Bahagian</th>
+                <th>Tindakan</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for b in bhgs %}
+            <tr>
+                <td>{{ forloop.counter }} {# starting index 1 #}</td>
+                <td>{{ b.nama }}</td>
+                <td><i class="fa fa-close"></i></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
