@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
-#from django.contrib import messages
+from django.contrib import messages
 # from django.utils import timezone
 from .models import Bahagian
 # from .forms import MessageForm, SearchForm, StudentForm
@@ -15,4 +15,10 @@ def senarai_bhg(request):
     bhgs = Bahagian.objects.all().order_by('created_date')
     return render(request,'pentadbiran/senarai_bahagian.html',{'bhgs': bhgs})
 
-
+def del_bhg(request,pk):
+    
+    bhg = get_object_or_404(Bahagian, pk=pk)
+    nama = bhg.nama
+    bhg.delete()
+    messages.success(request, "Bahagian " + str(nama) + " telah dihapuskan! ")
+    return redirect(reverse_lazy('senarai_bahagian'))
