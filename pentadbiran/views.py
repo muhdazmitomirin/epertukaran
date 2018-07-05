@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 # from django.utils import timezone
 from .models import Bahagian
+from .forms import BahagianForm
 # from .forms import MessageForm, SearchForm, StudentForm
 # from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 #from django.contrib.auth.decorators import login_required
@@ -22,3 +23,18 @@ def del_bhg(request,pk):
     bhg.delete()
     messages.success(request, "Bahagian " + str(nama) + " telah dihapuskan! ")
     return redirect(reverse_lazy('senarai_bahagian'))
+
+def add_bhg(request):
+
+    if request.method == "POST":
+        form = BahagianForm(request.POST)
+        if form.is_valid():
+            bahagian = form.save(commit=False)
+            bahagian.createdby = request.user
+            bahagian.save()
+            messages.success(request, "Bahagian record with ID: " + str(bahagian.pk) + " has been created ! ")
+            return redirect(reverse_lazy('senarai_bahagian'))
+    else:
+        form = BahagianForm()
+    print(request.user)
+    return render(request, 'pentadbiran/tambah_bahagian.html', {'form': form})
