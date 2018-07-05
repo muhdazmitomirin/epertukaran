@@ -10,19 +10,19 @@
                 </th>
             </tr>
             <tr>
-                <th width="5%">Bil</th>
-                <th width="70%">Nama Bahagian</th>
-                <th width="25%">Tindakan</th>
+                <th width="5%"><center>BIL</center></th>
+                <th width="80%"><center>NAMA BAHAGIAN</center></th>
+                <th width="15%"><center>TINDAKAN</center></th>
             </tr>
         </thead>
         <tbody>
             {% for b in bhgs %}
             <tr>
-                <td>{{ forloop.counter }} {# starting index 1 #}</td>
+                <td align='center'>{{ forloop.counter }} {# starting index 1 #}</td>
                 <td>{{ b.nama }}</td>
-                <td>
-                    <a href="{% url 'hapus_bahagian' b.pk %}"><i class="fa fa-pencil text-primary fa-lg"></i></a>
-                    <a href="{% url 'hapus_bahagian' b.pk %}"><i class="fa fa-trash text-danger fa-lg"></i></a>
+                <td align='center'>
+                    <a href="{% url 'kemaskini_bahagian' b.pk %}" title='Kemaskini'><i class="fa fa-pencil text-primary fa-lg"></i></a>
+                    <a href="{% url 'hapus_bahagian' b.pk %}" title='Hapus'><i class="fa fa-trash text-danger fa-lg"></i></a>
                 </td>
             </tr>
             {% endfor %}

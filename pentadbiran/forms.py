@@ -20,8 +20,8 @@ class BahagianForm(forms.ModelForm):
         # You can dynamically adjust your layout
         # self.helper.layout.append(Submit('save', 'save'))
         self.helper.form_class = 'form-horizontal'
-        self.helper.layout.append(Submit('submit_change', 'Submit', css_class="btn-primary"))
-        self.helper.layout.append(HTML('<a class="btn btn-primary" href={% url "tambah_bahagian" %}>Reset</a>'))
+        self.helper.layout.append(Submit('submit_change', 'Hantar', css_class="btn-success pull-right"))
+        self.helper.layout.append(HTML('<a class="btn btn-default pull-right" href={% url "senarai_bahagian" %}>Kembali</a>'))
 
     class Meta:
         model = Bahagian

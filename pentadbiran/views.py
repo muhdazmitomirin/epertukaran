@@ -32,9 +32,26 @@ def add_bhg(request):
             bahagian = form.save(commit=False)
             bahagian.createdby = request.user
             bahagian.save()
-            messages.success(request, "Bahagian record with ID: " + str(bahagian.pk) + " has been created ! ")
+            messages.success(request, "Bahagian dengan rekod ID: " + str(bahagian.pk) + " telah berjaya ditambah! ")
             return redirect(reverse_lazy('senarai_bahagian'))
     else:
         form = BahagianForm()
     print(request.user)
     return render(request, 'pentadbiran/tambah_bahagian.html', {'form': form})
+
+def edit_bhg(request,pk):
+
+    bahagian = get_object_or_404(Bahagian, pk=pk)
+    if request.method == "POST":
+        form = BahagianForm(request.POST,instance=bahagian)
+        if form.is_valid():
+            bahagian = form.save(commit=False)
+            bahagian.createdby = request.user
+            bahagian.save()
+
+            messages.success(request, "Bahagian dengan rekod ID : " + str(bahagian.pk) + " telah berjaya dikemaskini! ")
+            return redirect(reverse_lazy('senarai_bahagian'))
+    else:
+        form = BahagianForm(instance=bahagian)
+    
+    return render(request, 'pentadbiran/kemaskini_bahagian.html', {'form': form})
