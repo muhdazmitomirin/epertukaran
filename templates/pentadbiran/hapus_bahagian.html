@@ -2,19 +2,30 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="x_content">
-    <h3>Hapus Bahagian</h3>
-    <form method="post" class="form-horizontal">
-        {% csrf_token %}
-        {% if bahagian %}
-        <p>Anda pasti untuk menghapus maklumat : {{ bahagian.nama }} ?</p>
-        <br>
-        <button type="submit" name="submit_yes" value="Yes" class="btn btn-success">Ya</button>
-        {% else %}
-        <p>Harap maaf, maklumat yang ingin dihapus tidak wujud !</p>
-        <br>
-        {% endif %}
-        <a href="{% url 'senarai_bahagian' %}" class="btn btn-default">Tidak</a>
-    </form>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Tambah Bahagian</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <h3>Hapus Bahagian</h3>
+                <form method="post" class="form-horizontal">
+                    {% csrf_token %}
+                    {% if bahagian %}
+                    <p>Anda pasti untuk menghapus maklumat : {{ bahagian.nama }} ?</p>
+                    <br>
+                    <button type="submit" name="submit_yes" value="Yes" class="btn btn-success">Ya</button>
+                    {% else %}
+                    <p>Harap maaf, maklumat yang ingin dihapus tidak wujud !</p>
+                    <br>
+                    {% endif %}
+                    <a href="{% url 'senarai_bahagian' %}" class="btn btn-default">Tidak</a>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+
 {% endblock %}
