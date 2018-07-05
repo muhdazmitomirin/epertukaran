@@ -19,10 +19,14 @@ def senarai_bhg(request):
 def del_bhg(request,pk):
     
     bhg = get_object_or_404(Bahagian, pk=pk)
-    nama = bhg.nama
-    bhg.delete()
-    messages.success(request, "Bahagian " + str(nama) + " telah dihapuskan! ")
-    return redirect(reverse_lazy('senarai_bahagian'))
+    if request.method == "POST":
+        if request.POST.get("submit_yes", ""):
+            nama = bhg.nama
+            bhg.delete()
+            messages.success(request, "Bahagian " + str(nama) + " telah dihapuskan! ")
+            return redirect(reverse_lazy('senarai_bahagian'))
+        
+    return render(request, 'pentadbiran/hapus_bahagian.html', {'bahagian': bhg, 'pk':pk})
 
 def add_bhg(request):
 
