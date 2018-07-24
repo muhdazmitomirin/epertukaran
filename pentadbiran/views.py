@@ -6,16 +6,22 @@ from .models import Bahagian
 from .forms import BahagianForm
 # from .forms import MessageForm, SearchForm, StudentForm
 # from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-#from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 #from django_datatables_view.base_datatable_view import BaseDatatableView
 #from django.db.models import Count, Sum, Q, Case, Value, When, IntegerField
 	
 # Create your views here.
 
+@login_required(login_url='/accounts/login/')
+def home2(request):
+    return render(request,'pentadbiran/index.html')
+
+@login_required(login_url='/accounts/login/')
 def senarai_bhg(request):
     bhgs = Bahagian.objects.all().order_by('created_date')
     return render(request,'pentadbiran/senarai_bahagian.html',{'bhgs': bhgs})
 
+@login_required(login_url='/accounts/login/')
 def del_bhg(request,pk):
     
     bhg = get_object_or_404(Bahagian, pk=pk)
@@ -28,6 +34,7 @@ def del_bhg(request,pk):
         
     return render(request, 'pentadbiran/hapus_bahagian.html', {'bahagian': bhg, 'pk':pk})
 
+@login_required(login_url='/accounts/login/')
 def add_bhg(request):
 
     if request.method == "POST":
@@ -43,6 +50,7 @@ def add_bhg(request):
     print(request.user)
     return render(request, 'pentadbiran/tambah_bahagian.html', {'form': form})
 
+@login_required(login_url='/accounts/login/')
 def edit_bhg(request,pk):
 
     bahagian = get_object_or_404(Bahagian, pk=pk)

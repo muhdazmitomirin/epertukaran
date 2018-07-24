@@ -38,7 +38,9 @@
             </div>
 
             <div class="clearfix"></div>
+            {% block user_navbar %}
 
+              {% if user.is_authenticated %}
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
@@ -111,29 +113,25 @@
               <div class="menu_section">
                   <ul class="nav side-menu">
                     <li><a><i class="fa fa-info"></i> Manual Pengguna</a>
-                    <li><a><i class="fa fa-sign-out"></i> Log Keluar</a>
+                    <li><a href="/accounts/logout/"><i class="fa fa-sign-out"></i> Log Keluar</a>
                   </li>
                 </ul>  
               </div>  
             </div>
-            <!-- /sidebar menu -->
-
-            <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
+            {% else %}
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                  <ul class="nav side-menu">
+                    <li><a href="/accounts/login/"><i class="fa fa-sign-in"></i> Log Masuk </a>
+                  </li>
+                </ul>  
+              </div>
+              
+              
             </div>
-            <!-- /menu footer buttons -->
+            <!-- /sidebar menu -->
+            {% endif %}
+            {% endblock %}
           </div>
         </div>
 
@@ -144,7 +142,7 @@
               <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
-
+                {% if user.is_authenticated %}
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -154,10 +152,11 @@
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="javascript:;"> Profil Pengguna</a></li>
                     <li><a href="javascript:;"> Modul Pentadbir</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Keluar</a></li>
+                    <li><a href="/accounts/logout/"><i class="fa fa-sign-out pull-right"></i> Log Keluar</a></li>
                   </ul>
                 </li>
               </ul>
+                {% endif %}
             </nav>
           </div>
         </div>
