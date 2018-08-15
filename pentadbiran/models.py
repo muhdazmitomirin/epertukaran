@@ -9,3 +9,13 @@ class Bahagian(models.Model):
 	
 		def __str__(self):
 			return self.nama
+
+class Tatatertib(models.Model):
+
+		icno = models.CharField('IC',max_length=14,unique=True,blank=False,null=False)
+		catatan = models.CharField('Catatan',max_length=255,blank=False,null=False)
+		createdby = models.ForeignKey('auth.User',on_delete=models.CASCADE)
+		created_date = models.DateTimeField('Created Date',auto_now_add=True)
+	
+		def __str__(self):
+			return self.icno
