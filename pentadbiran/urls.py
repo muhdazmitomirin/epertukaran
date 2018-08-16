@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
 
-    url(r'^$',views.home2,name='pentadbiran_home'),
+    url(r'^$',login_required(views.home2),name='pentadbiran_home'),
     #SENARAI BAHAGIAN
     # url(r'^sb/$',views.senarai_bhg,name='senarai_bahagian'), #Senarai Bahagian - senarai
     # url(r'^sbnew/$', views.add_bhg, name='tambah_bahagian'), #Senarai Bahagian - tambah
