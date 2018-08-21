@@ -95,6 +95,17 @@ DATABASES = {
             'driver': 'ODBC Driver 13 for SQL Server',
         },
     },
+    # 'other': {
+    #     'ENGINE': 'sql_server.pyodbc',
+    #     'NAME': 'MCDB',
+    #     'USER': 'sa',
+    #     'PASSWORD': 'cdbdev@2017',
+    #     'HOST': '10.101.1.100',
+    #     'PORT': '1433',
+    #     'OPTIONS': {
+    #         'driver': 'ODBC Driver 13 for SQL Server',
+    #     },
+    # },
 }
 
 # Password validation
