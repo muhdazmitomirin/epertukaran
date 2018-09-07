@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'epertukaran.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'sql_server.pyodbc',
-        'NAME': 'DBEpertukaran',
+        'NAME': 'MCDB',
         'USER': 'sa',
         'PASSWORD': 'cdbdev@2017',
         'HOST': '10.101.1.100',

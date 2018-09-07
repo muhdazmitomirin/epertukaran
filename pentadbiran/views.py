@@ -1,5 +1,5 @@
 from django.urls import reverse
-from .models import Bahagian 
+from .models import Bahagian,Tatatertib 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib import messages
@@ -8,11 +8,12 @@ from .forms import BahagianForm
 from django.contrib.auth.decorators import login_required
 from django_datatables_view.base_datatable_view import BaseDatatableView
 from django.db.models import Count, Sum, Q, Case, Value, When, IntegerField
-
+from django.db import connection
 # Create your views here.
 def home2(request):
     return render(request,'pentadbiran/home.html')
 
+# ----------------------------- Bahagian ------------------------------------------------------------------------------
 # Senarai Bahagian
 def home_bahagian(request):
     # return render(request, 'pentadbiran/bahagian_json2.html')
@@ -139,3 +140,32 @@ class bahagian_list_json(BaseDatatableView):
             ])
             # print(json_data)
         return json_data
+
+# ----------------------------- Tatatertib ------------------------------------------------------------------------------
+
+def datadb(request):
+    import pyodbc
+    conn = pyodbc.connect("Driver={SQL Server Native Client 11.0};"
+                      "Server=10.101.1.100;"
+                      "Database=MCDB;"
+                      "Trusted_Connection=yes;")
+
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM MCDB.dbo.TblPersonel where ICNo='890211025433'")
+
+    for row in cursor:
+        print(row)
+    return HttpResponse(row)
+
+
+def my_acc(request):
+    
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT ICNo,Nama,NamaJawatan FROM dbo.TblPersonel WHERE ICNO='890211025433';")
+        if cursor.rowcount == 0:
+            html = "<html><body>There is no Course with number %s.</body></html>" 
+        else:
+            row = cursor.fetchone()
+            output = 'Registration failed'
+            #return render(request, 'personel.html',{"output": 'test'})
+            return render(request, 'personel.html',context={'ICNo' :  row[0], 'Nama' : row[1],'NamaJawatan' : row[2]} )
